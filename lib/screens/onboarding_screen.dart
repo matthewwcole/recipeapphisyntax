@@ -46,7 +46,7 @@ class OnBoardingScreen extends StatelessWidget {
                   ),
                   child: Center(
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
@@ -56,13 +56,11 @@ class OnBoardingScreen extends StatelessWidget {
                             fontWeight: FontWeight.w600,
                           ),
                         ),
-                        SizedBox(height: h * .01),
-                        const Text(
-                          'The Secret is the Kraut',
+                        Text(
+                          'The Secret is the Kraut!',
                           style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w300),
+                              fontSize: w * .03, fontWeight: FontWeight.w300),
                         ),
-                        SizedBox(height: h * .032),
                         SizedBox(
                           width: w * .8,
                           child: ElevatedButton(
@@ -72,10 +70,10 @@ class OnBoardingScreen extends StatelessWidget {
                                     MaterialPageRoute(
                                         builder: (context) => const Home()));
                               },
-                              child: const Text(
+                              child: Text(
                                 "Get Kraut'n",
                                 style: TextStyle(
-                                    fontSize: 14,
+                                    fontSize: w * .03,
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold),
                               )),

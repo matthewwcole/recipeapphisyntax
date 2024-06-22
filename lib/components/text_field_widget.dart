@@ -8,7 +8,7 @@ class TextFieldWidget extends StatelessWidget {
     final h = MediaQuery.of(context).size.height;
     final w = MediaQuery.of(context).size.width;
     return Container(
-      height: h * .06,
+      height: h * .09,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         boxShadow: const [

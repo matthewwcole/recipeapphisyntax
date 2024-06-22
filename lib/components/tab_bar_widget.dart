@@ -28,7 +28,7 @@ class TabBarWidget extends StatelessWidget {
                 TabItem(title: "Breakfast"),
                 TabItem(title: "Lunch"),
                 TabItem(title: "Dinner"),
-                TabItem(title: "Quick"),
+                TabItem(title: "Snack"),
               ],
             ),
           ),
@@ -37,7 +37,7 @@ class TabBarWidget extends StatelessWidget {
           ),
           SizedBox(
             height: h * .3,
-            child: TabBarView(
+            child: const TabBarView(
               children: [],
             ),
           )
