@@ -41,10 +41,10 @@ class TabBarWidget extends StatelessWidget {
             height: h * .3,
             child: const TabBarView(
               children: [
-                HomeTabBarView(recipe: "breakfast"),
-                HomeTabBarView(recipe: "lunch"),
-                HomeTabBarView(recipe: "dinner"),
-                HomeTabBarView(recipe: "snack")
+                HomeTabBarView(recipe: "Breakfast"),
+                HomeTabBarView(recipe: "Lunch"),
+                HomeTabBarView(recipe: "Dinner"),
+                HomeTabBarView(recipe: "Snack")
               ],
             ),
           )
@@ -106,61 +106,62 @@ class HomeTabBarView extends StatelessWidget {
             );
           }
           return ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              Map<String, dynamic> snap = snapshot.data![index];
-              int time = snap['totalTime'].toInt();
-              int calories = snap['calories'].toInt();
-              return Container(
-                margin: EdgeInsets.only(right: w * .02),
-                width: w * .5,
-                child: Stack(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: w,
-                          height: h * .17,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              image: DecorationImage(
-                                  image: NetworkImage(snap['image']),
-                                  fit: BoxFit.fill)),
-                        ),
-                        SizedBox(
-                          height: h * .01,
-                        ),
-                        Text(
-                          snap['lab'],
-                          style: TextStyle(
-                              fontSize: w * .035, fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(
-                          height: h * .01,
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              "${calories.toString()} . ${time.toString()}",
-                              style: TextStyle(
-                                  fontSize: w * .03, color: Pallete.greyColor),
-                            )
-                          ],
-                        )
-                      ],
-                    )
-                  ],
-                ),
-              );
-            },
-            separatorBuilder: (context, index) {
-              return const SizedBox(
-                width: 15,
-              );
-            },
-            itemCount: snapshot.data!.length,
-          );
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                Map<String, dynamic> snap = snapshot.data![index];
+                int time = snap['totalTime'].toInt();
+                int calories = snap['calories'].toInt();
+                return Container(
+                  margin: EdgeInsets.only(right: w * .02),
+                  width: w * .5,
+                  child: Stack(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: w,
+                            height: h * .17,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                image: DecorationImage(
+                                    image: NetworkImage(snap['image']),
+                                    fit: BoxFit.fill)),
+                          ),
+                          SizedBox(
+                            height: h * .01,
+                          ),
+                          Text(
+                            snap['label'],
+                            style: TextStyle(
+                                fontSize: w * .035,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            height: h * .01,
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                "${calories.toString()} . ${time.toString()}",
+                                style: TextStyle(
+                                    fontSize: w * .03,
+                                    color: Pallete.greyColor),
+                              )
+                            ],
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                );
+              },
+              separatorBuilder: (context, index) {
+                return const SizedBox(
+                  width: 15,
+                );
+              },
+              itemCount: snapshot.data!.length);
         });
   }
 }
