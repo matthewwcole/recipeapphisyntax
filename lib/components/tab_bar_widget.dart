@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipeapphisyntax/constants/constant_function.dart';
+import 'package:recipeapphisyntax/screens/detail_screen.dart';
 import 'package:recipeapphisyntax/theme/pallete.dart';
 
 class TabBarWidget extends StatelessWidget {
@@ -93,7 +94,7 @@ class HomeTabBarView extends StatelessWidget {
   Widget build(BuildContext context) {
     final h = MediaQuery.of(context).size.height;
     final w = MediaQuery.of(context).size.width;
-    return FutureBuilder<List<Map<String, dynamic>>>(
+    return FutureBuilder(
         future: ConstantFunction.getResponse(recipe),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -105,63 +106,70 @@ class HomeTabBarView extends StatelessWidget {
               child: Text('no data'),
             );
           }
-          return ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                Map<String, dynamic> snap = snapshot.data![index];
-                int time = snap['totalTime'].toInt();
-                int calories = snap['calories'].toInt();
-                return Container(
-                  margin: EdgeInsets.only(right: w * .02),
-                  width: w * .5,
-                  child: Stack(
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: w,
-                            height: h * .17,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                image: DecorationImage(
-                                    image: NetworkImage(snap['image']),
-                                    fit: BoxFit.fill)),
-                          ),
-                          SizedBox(
-                            height: h * .01,
-                          ),
-                          Text(
-                            snap['label'],
-                            style: TextStyle(
-                                fontSize: w * .035,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(
-                            height: h * .01,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                "${calories.toString()} . ${time.toString()}",
-                                style: TextStyle(
-                                    fontSize: w * .03,
-                                    color: Pallete.greyColor),
-                              )
-                            ],
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                );
-              },
-              separatorBuilder: (context, index) {
-                return const SizedBox(
-                  width: 15,
-                );
-              },
-              itemCount: snapshot.data!.length);
+          return SizedBox(
+            height: h * .28,
+            child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  Map<String, dynamic> snap = snapshot.data![index];
+                  int time = snap['totalTime'].toInt();
+                  int calories = snap['calories'].toInt();
+                  return Container(
+                    margin: EdgeInsets.only(right: w * .02),
+                    width: w * .5,
+                    child: Stack(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            DetailScreen(item: snap)));
+                              },
+                              child: Container(
+                                width: w,
+                                height: h * .17,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    image: DecorationImage(
+                                        image: NetworkImage(snap['image']),
+                                        fit: BoxFit.fill)),
+                              ),
+                            ),
+                            SizedBox(
+                              height: h * .01,
+                            ),
+                            Text(
+                              snap['label'],
+                              style: TextStyle(
+                                  fontSize: w * .035,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              height: h * .01,
+                            ),
+                            Text(
+                              "calories: ${calories.toString()} . ${time.toString()} Min",
+                              style: TextStyle(
+                                  fontSize: w * .03, color: Pallete.greyColor),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return const SizedBox(
+                    width: 15,
+                  );
+                },
+                itemCount: snapshot.data!.length),
+          );
         });
   }
 }
